@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    #slidingMenu {
+    width: 50px;
+    background-color: #333;
+    transition: width 0.3s;
+    overflow: hidden;
+    position: fixed;
+}
+
+#slidingMenu:hover {
+    width: 200px;
+}
+
+#slidingMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#slidingMenu ul li {
+    padding: 10px;
+    color: white;
+    border-bottom: 1px solid #444;
+}
+
+#slidingMenu ul li:hover {
+    background-color: #dfc7c7;
+}
+#pagination-bar{
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QnA</title>
+</head>
+<body>
+  <!-- Navbar -->
+
+        <div class="head w-100 h-2" style="display: flex;">
+            <button class="btn btn-dark w-50"  id="prev">Previous</button>
+            <button class="btn btn-dark w-50" id="next">Next</button>
+        </div>
+    <div  class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+              <button
+                data-mdb-collapse-init
+                class="navbar-toggler"
+                type="button"
+                data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarExample01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item active">
+                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <div class="mt-4 p-3 bg-warning text-white rounded">
+            <h1>TINITIATE APPS</h1>
+            <h3 id="h3-header"></h3>
+        </div>
+       
+         <div class="offcanvas offcanvas-body offcanvas-lg" id="slidingMenu">
+            <div class="offcanvas-header">
+              <h1 class="offcanvas-title">Heading</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+             
+              <button class="btn btn-secondary" type="button">A Button</button>
+            </div>
+          </div>
+    <!-- <div id="" style="border:1px solid black; height: 100vh; overflow: auto;"><div id="accordian"></div></div> -->
+ 
+<div class="row mt-2">
+   
+
+
+    <div id="content" style="height: 100%;"></div>
+
+
+<hr class="solid">
+<div id="pagination-bar"></div>
+<hr class="solid">
+
+
+
+<footer>
+    <div class="mt-4 p-5 bg-dark text-white rounded">
+        <div class="row">
+            <div class="col">
+            <span>All rights reserved </span></div>
+            <div class="col">
+                <p>About Us!</p>
+                <p>Home</p>
+            </div>
+            <div class="col">
+            <div style="float:right;">Follow us on 
+                <ul>
+                    <li>Twitter</li>
+                    <li>instagram</li>
+                    <li>youtube</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="/ti-app-interview-qna/index.js"></script> 
+<!-- <script src="index.js"></script> -->
+
+</body>
+</html>

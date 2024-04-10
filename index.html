@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinitiate</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+        <div class="mt-4 p-5 text-white rounded" style="background-color:black; color: black;">
+        <br>
+        <h1>TINITIATE</h1>
+        <h2> Welcome to tinitiate!</h2>
+        
+    </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="login-container p-5 m-7 mt-3" style="border:1px solid grey; border-radius: 2%;">
+                <h2> Login</h2>
+            <form id="login-form">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" required placeholder="name@example.com">
+                <label for="floatingInput">UserName</label>
+              </div>
+              <!-- <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div> -->
+  
+       
+            <!-- <div class="form-group">
+                <label for="username">Name:</label>
+                <input type="text" id="username" name="username" required>
+            </div> -->
+            <div class="form-group">
+                <input class="btn btn-dark" type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+<footer>
+    <div class="mt-4 p-5 bg-dark text-white rounded">
+        <div class="row">
+            <div class="col">
+            <span>All rights reserverd </span></div>
+            <div class="col">
+                <p>About Us!</p>
+                <p>Home</p>
+            </div>
+            <div class="col">
+            <div style="float:right;">Follow us on 
+                <ul>
+                    <li>Twitter</li>
+                    <li>instagram</li>
+                    <li>youtube</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>  
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        document.getElementById('login-form').addEventListener('submit', async(event) => {
+            event.preventDefault();
+            username = document.getElementById('username').value
+            
+            if (username) {                
+                 // Store the token in local storage or handle it as needed
+                 //setItem('token', data.token);
+                 localStorage.setItem('token', username);
+                 // Redirect to a protected page or display a success message
+                 window.location.href = './menu.html';
+             } else {
+                 alert('Login failed. Please check your credentials.');
+             }
+            //localStorage.setItem(data=username)
+            
+            });
+    </script>
+</body>
+</html>

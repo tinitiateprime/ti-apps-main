@@ -1,0 +1,184 @@
+<html>
+<head>
+  <title>Menu</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid text-white">
+      <p></p>
+      <p id="user"></p>
+  </div>
+  </nav>
+
+<div class="container">
+  <div class="mt-4 p-5 bg-warning text-white rounded">
+  <h1>TINITIATE APPS</h1>
+  <p>(c) 2024</p>
+  </div>
+  <br>
+  <div class="row">
+  <div class="col-sm-2">
+    <ul class="list-group">
+      <li class="list-group-item active">Navigation</li>
+      <li class="list-group-item">My Profile</li>
+      <li class="list-group-item">Third item</li>
+    </ul>
+  </div>
+  <!-- ADMIN ROW START -->
+  <div class="col-sm-5">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./cv.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Profile Manager</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">ADMIN</h4>
+        <p class="card-text">Profile Manager</p>
+        <a onclick="getcontent('profile_manager','admin')" class="btn btn-danger">Build Now !</a>
+      </div>
+    </div>
+    <br>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./choose.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;MCQ Manager</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">ADMIN</h4>
+        <p class="card-text">Profile Manager</p>
+        <a onclick="getcontent('mcq_quiz','admin')" class="btn btn-danger">View</a>
+      </div>
+    </div>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./interview_qna.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Interview QnA</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Interview QnA</p>
+        <a onclick="getcontent('interview_qna','admin')" class="btn btn-danger">View</a>
+      </div>
+    </div>
+    <br>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./interview.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Interview Process</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Interview Proces</p>
+        <a onclick="getcontent('interview_process','admin')" class="btn btn-danger">View</a>
+      </div>
+    </div>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./gen-ai.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Gen AI</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Gen AI</p>
+        <a onclick="getcontent('gen-ai','admin')" class="btn btn-danger">View</a>
+      </div>
+    </div>
+  </div>
+  <!-- ADMIN ROW END -->
+  <!-- USER ROW START -->
+  <div class="col-sm-5">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./cv.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Profile Manager</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">USER</h4>
+        <p class="card-text">Profile Manager</p>
+        <a onclick="getcontent('profile_manager','user')" class="btn btn-dark">Build Now !</a>
+      </div>
+    </div>
+    <br>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./choose.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;MCQ Manager</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">USER</h4>
+        <p class="card-text">Profile Manager</p>
+        <a onclick="getcontent('mcq_quiz','user')" class="btn btn-dark">GoTo Tests</a>
+      </div>
+    </div>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./interview_qna.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Interview QnA</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Interview QnA</p>
+        <a onclick="getcontent('interview_qna','user')" class="btn btn-dark">View</a>
+      </div>
+    </div>
+    <br>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./interview.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Interview Process</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Interview Proces</p>
+        <a onclick="getcontent('interview_process','user')" class="btn btn-dark">View</a>
+      </div>
+    </div>
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+      <h4><img class="card-img-top" src="./gen-ai.png" style="width:4rem; height:4rem;">
+      &nbsp;&nbsp;Gen AI</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <p class="card-text">Gen AI</p>
+        <a onclick="getcontent('gen-ai','user')"class="btn btn-dark">View</a>
+      </div>
+    </div>
+  </div>
+  <!-- USER ROW END -->
+</div>
+<br><br>
+ 
+<footer>
+  <div class="mt-4 p-5 bg-dark text-white rounded">
+      <div class="row">
+          <div class="col">
+          <span>All rights reserverd </span></div>
+          <div class="col">
+              <p>About Us!</p>
+              <p>Home</p>
+          </div>
+          <div class="col">
+          <div style="float:right;">Follow us on 
+              <ul>
+                  <li>Twitter</li>
+                  <li>instagram</li>
+                  <li>youtube</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  </div>
+</footer> 
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="index.js"></script>
+</body>
+<html>
+
