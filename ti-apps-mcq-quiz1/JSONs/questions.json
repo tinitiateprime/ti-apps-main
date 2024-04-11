@@ -1,0 +1,46 @@
+{
+  "quiz": {
+    "questions": [
+      {
+        "question": "Question 1: What is the capital of France?",
+        "options": [
+          "London",
+          "Paris",
+          "Berlin",
+          "Rome"
+        ],
+        "answer": "b"
+      },
+      {
+        "question": "Question 2: Who wrote \"Romeo and Juliet\"?",
+        "options": [
+          "William Shakespeare",
+          "Jane Austen",
+          "Charles Dickens",
+          "Mark Twain"
+        ],
+        "answer": "a"
+      },
+      {
+        "question": "Question 3: What is the powerhouse of the cell?",
+        "options": [
+          "Mitochondria",
+          "Nucleus",
+          "Ribosome",
+          "Endoplasmic Reticulum"
+        ],
+        "answer": "a"
+      },
+      {
+        "question": "Question 4: Which planet is known as the Red Planet?",
+        "options": [
+          "Venus",
+          "Mars",
+          "Jupiter",
+          "Saturn"
+        ],
+        "answer": "b"
+      }
+    ]
+  }
+}

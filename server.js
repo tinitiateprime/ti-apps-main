@@ -45,20 +45,20 @@ app.get('/', (req, res) => {
   });
 
  
-app.get('/ti-apps-profile-manager/index.html', (req, res) => {
-    res.sendFile(path.join(__dirname,'ti-apps-profile-manager', 'index.html'));
+app.get('/ti-apps-profile-manager1/index.html', (req, res) => {
+    res.sendFile(path.join(__dirname,'ti-apps-profile-manager1', 'index.html'));
     
 });
 
-app.get('/ti-apps-profile-manager/style.css', (req, res) => {
-    res.sendFile(path.join(__dirname,'ti-apps-profile-manager', 'style.css'));
+app.get('/ti-apps-profile-manager1/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname,'ti-apps-profile-manager1', 'style.css'));
 });
 
-app.get('/ti-apps-profile-manager/index.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager','scripts', 'index.js'));    
+app.get('/ti-apps-profile-manager1/scripts/index.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager1','scripts', 'index.js'));    
 });
-app.get('/ti-apps-profile-manager/home.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager','views', 'home.html'));    
+app.get('/ti-apps-profile-manager1/home.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager1','views', 'home.html'));    
 });
 
 const bucketName = 'ti-apps-data';
@@ -102,7 +102,7 @@ const bucketName = 'ti-apps-data';
 
     
     // Save the output to a JSON file
-    fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager','markdown-driver.json'), JSON.stringify(structure, null, 2), (writeErr) => {
+    fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','markdown-driver.json'), JSON.stringify(structure, null, 2), (writeErr) => {
       if (writeErr) {
         console.log('Error writing to file:', writeErr);
       } else {
@@ -116,11 +116,11 @@ const bucketName = 'ti-apps-data';
 
 const directoryPath = 'profile-master/data/';
 const filePath = []
-app.get('/ti-apps-profile-manager/jsondata', (req, res) => {
+app.get('/ti-apps-profile-manager1/jsondata', (req, res) => {
    readDirectory(directoryPath);
 
   //const mdFiles = fileList.filter(file => path.extname(file) === '.md');
-  fs.readFile(path.join(__dirname,'ti-apps-profile-manager','markdown-driver.json'), 'utf8', (err, content) => {
+  fs.readFile(path.join(__dirname,'ti-apps-profile-manager1','markdown-driver.json'), 'utf8', (err, content) => {
     if (err) {
         console.error('Error reading file:', err);
         res.status(500).send('Error reading file');
@@ -133,7 +133,7 @@ app.get('/ti-apps-profile-manager/jsondata', (req, res) => {
 
 
 
-app.get('/ti-apps-profile-manager/mdcontent', (req, res) => {
+app.get('/ti-apps-profile-manager1/mdcontent', (req, res) => {
  console.log(req.query.file)
   //const directoryPath = path.join(__dirname, req.query.file);
   const filePath = path.join(__dirname, req.query.file);
@@ -156,7 +156,7 @@ s3.getObject({ Bucket: bucketName, Key: fileKey }, (err, data) => {
 });});
 
 
-app.post('/ti-apps-profile-manager/save', (req, res) => {
+app.post('/ti-apps-profile-manager1/save', (req, res) => {
   
   const jsonData = req.body;
   //console.log(jsonData)
@@ -169,24 +169,24 @@ app.post('/ti-apps-profile-manager/save', (req, res) => {
       });
   });
 
-  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager','Output', 'output.md'), markdownContent);
+  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','Output', 'output.md'), markdownContent);
 
   res.send('Data saved successfully');
 });
 
-app.post('/`ti-apps-profile-manager/draft', (req, res) => {
+app.post('/ti-apps-profile-manager1/draft', (req, res) => {
   
   const jsonData = req.body;
   //console.log(jsonData)
   
-  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager','Drafts', 'draft.json'), JSON.stringify(jsonData, null, 2));
+  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'), JSON.stringify(jsonData, null, 2));
 
   res.send('Data saved in draft');
 });
 
-app.get('/ti-apps-profile-manager/load-draft', (req, res) => {
-  if (fs.existsSync(path.join(__dirname,'ti-apps-profile-manager','Drafts', 'draft.json'))) {
-      const jsonData = fs.readFileSync(path.join(__dirname,'ti-apps-profile-manager','Drafts', 'draft.json'), 'utf8');
+app.get('/ti-apps-profile-manager1/load-draft', (req, res) => {
+  if (fs.existsSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'))) {
+      const jsonData = fs.readFileSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'), 'utf8');
       res.json(JSON.parse(jsonData));
   } else {
       res.json([]);
@@ -195,43 +195,43 @@ app.get('/ti-apps-profile-manager/load-draft', (req, res) => {
 
 //MCQ SECTION 
 
-app.get('/ti-apps-mcq-quiz/index.js', (req, res) => {
-  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz', 'scripts', 'index.js'));    
+app.get('/ti-apps-mcq-quiz1/scripts/index.js', (req, res) => {
+  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz1', 'scripts', 'index.js'));    
 });
-app.get('/ti-apps-mcq-quiz/quiz.js', (req, res) => {
-  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz', 'scripts', 'quiz.js'));    
+app.get('/ti-apps-mcq-quiz1/scripts/quiz.js', (req, res) => {
+  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz1', 'scripts', 'quiz.js'));    
 });
-app.get('/ti-apps-mcq-quiz/quiz_multiple.js', (req, res) => {
-  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz', 'scripts', 'quiz_multiple.js'));    
+app.get('/ti-apps-mcq-quiz1/scripts/quiz_multiple.js', (req, res) => {
+  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz1', 'scripts', 'quiz_multiple.js'));    
 });
-app.get('/ti-apps-mcq-quiz/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz','index.html'));    
-});
-
-app.get('/ti-apps-mcq-quiz/random.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz','scripts', 'random.js'));    
+app.get('/ti-apps-mcq-quiz1/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname,'ti-apps-mcq-quiz1','index.html'));    
 });
 
-app.get('/ti-apps-mcq-quiz/random_multiple.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz','scripts', 'random_multiple.js'));    
+app.get('/ti-apps-mcq-quiz1/scripts/random.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz1','scripts', 'random.js'));    
 });
 
-
-app.get('/ti-apps-mcq-quiz/quiz.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz','views', 'quiz.html'));    
-});
-
-app.get('/ti-apps-mcq-quiz/quiz.md', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz','quiz.md'));    
-});
-
-app.get('/ti-apps-mcq-quiz/quiz_multiple.md', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz','quiz_multiple.md'));    
+app.get('/ti-apps-mcq-quiz1/scripts/random_multiple.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz1','scripts', 'random_multiple.js'));    
 });
 
 
-app.get('/ti-apps-mcq-quiz/quiz.json', (req, res) => {
-  const mdPath = path.join(__dirname,'ti-apps-mcq-quiz','JSONs', 'quiz.json');
+app.get('/ti-apps-mcq-quiz1/quiz.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz1','views', 'quiz.html'));    
+});
+
+app.get('/ti-apps-mcq-quiz1/quiz.md', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz1','quiz.md'));    
+});
+
+app.get('/ti-apps-mcq-quiz1/quiz_multiple.md', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-mcq-quiz1','quiz_multiple.md'));    
+});
+
+
+app.get('/ti-apps-mcq-quiz1/quiz.json', (req, res) => {
+  const mdPath = path.join(__dirname,'ti-apps-mcq-quiz1','JSONs', 'quiz.json');
     fs.readFile(mdPath, (err, data) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -243,20 +243,20 @@ app.get('/ti-apps-mcq-quiz/quiz.json', (req, res) => {
     }); 
 });
 
-app.get('/ti-apps-mcq-quiz/execute' , ()=>{
-  require('./ti-apps-mcq-quiz/scripts/quiz.js');
-  require('./ti-apps-mcq-quiz/scripts/random.js');
+app.get('/ti-apps-mcq-quiz1/execute' , ()=>{
+  require('./ti-apps-mcq-quiz1/scripts/quiz.js');
+  require('./ti-apps-mcq-quiz1/scripts/random.js');
 });
 
-app.get('/ti-apps-mcq-quiz/execute_multiple' , ()=>{
+app.get('/ti-apps-mcq-quiz1/execute_multiple' , ()=>{
   //console.log('inside execute')
-require('./ti-apps-mcq-quiz/scripts/quiz_multiple.js');
-require('./ti-apps-mcq-quiz/scripts/random_multiple.js');
+require('./ti-apps-mcq-quiz1/scripts/quiz_multiple.js');
+require('./ti-apps-mcq-quiz1/scripts/random_multiple.js');
 });
 
-app.get('/ti-apps-mcq-quiz/random', (req, res) => {
+app.get('/ti-apps-mcq-quiz1/random', (req, res) => {
   //console.log('random.json')
-  const mdPath = path.join(__dirname,'ti-apps-mcq-quiz','JSONs', 'random.json');
+  const mdPath = path.join(__dirname,'ti-apps-mcq-quiz1','JSONs', 'random.json');
     fs.readFile(mdPath, (err, data) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -268,8 +268,8 @@ app.get('/ti-apps-mcq-quiz/random', (req, res) => {
     });;    
 });
 
-app.get('/ti-apps-mcq-quiz/quiz.md', (req, res) => {
- const mdPath = (path.join(__dirname,'ti-apps-mcq-quiz','quiz.md'));   
+app.get('/ti-apps-mcq-quiz1/quiz.md', (req, res) => {
+ const mdPath = (path.join(__dirname,'ti-apps-mcq-quiz1','quiz.md'));   
  fs.readFile(mdPath, (err, data) => {
   if (err) {
     res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -281,8 +281,8 @@ app.get('/ti-apps-mcq-quiz/quiz.md', (req, res) => {
 }); 
 });
 
-app.get('/ti-apps-mcq-quiz/quiz_multiple.md', (req, res) => {
- const mdPath = (path.join(__dirname,'ti-apps-mcq-quiz','quiz_multiple.md'));   
+app.get('/ti-apps-mcq-quiz1/quiz_multiple.md', (req, res) => {
+ const mdPath = (path.join(__dirname,'ti-apps-mcq-quiz1','quiz_multiple.md'));   
  fs.readFile(mdPath, (err, data) => {
   if (err) {
     res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -294,13 +294,13 @@ app.get('/ti-apps-mcq-quiz/quiz_multiple.md', (req, res) => {
 }); 
 });
 
-app.post('/ti-apps-mcq-quiz/submit', (req, res) => {
+app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
     
   const jsonData = req.body;
   //console.log(jsonData)
 //  console.log(jsonData)
 
-  fs.writeFileSync(path.join(__dirname,'ti-apps-mcq-quiz','JSONs', 'result.json'), JSON.stringify(jsonData, null, 2));
+  fs.writeFileSync(path.join(__dirname,'ti-apps-mcq-quiz1','JSONs', 'result.json'), JSON.stringify(jsonData, null, 2));
 
   res.send('Data saved successfully');
 });

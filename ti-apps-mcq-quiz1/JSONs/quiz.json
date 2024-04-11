@@ -1,0 +1,76 @@
+{
+  "quiz": {
+    "questions": [
+      {
+        "question": "What is the capital of France?",
+        "options": [
+          "London",
+          "Paris",
+          "Berlin",
+          "Rome"
+        ],
+        "answer": "Paris"
+      },
+      {
+        "question": "Who wrote \"Romeo and Juliet\"?",
+        "options": [
+          "William Shakespeare",
+          "Jane Austen",
+          "Charles Dickens",
+          "Mark Twain"
+        ],
+        "answer": "William Shakespeare"
+      },
+      {
+        "question": "What is the powerhouse of the cell?",
+        "options": [
+          "Mitochondria",
+          "Nucleus",
+          "Ribosome",
+          "Endoplasmic Reticulum"
+        ],
+        "answer": "Mitochondria"
+      },
+      {
+        "question": "Which planet is known as the Red Planet?",
+        "options": [
+          "Venus",
+          "Mars",
+          "Jupiter",
+          "Saturn"
+        ],
+        "answer": "Mars"
+      },
+      {
+        "question": "How many sides does a triangle have?",
+        "options": [
+          "4",
+          "5",
+          "3",
+          "6"
+        ],
+        "answer": "3"
+      },
+      {
+        "question": "Who is the president of the United States?",
+        "options": [
+          "Donald Trump",
+          "Barack Obama",
+          "Joe Biden",
+          "George W. Bush"
+        ],
+        "answer": "Joe Biden"
+      },
+      {
+        "question": "Who is the prime minister of India?",
+        "options": [
+          "Manmohan Singh",
+          "Indira Gandhi",
+          "Narendra Modi",
+          "Jawaharlal Nehru"
+        ],
+        "answer": "Narendra Modi"
+      }
+    ]
+  }
+}
