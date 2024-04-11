@@ -1,6 +1,6 @@
 # ti-apps-main
 
-
+```
 install node js 
 
 npm i node
@@ -11,4 +11,9 @@ npm i aws-sdk
 npm i express-session 
  npm i dotenv
  npm i axios 
+```
+
  
+```Powershell
+
+```
