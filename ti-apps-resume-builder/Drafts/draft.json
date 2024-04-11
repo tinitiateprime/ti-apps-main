@@ -1,0 +1,34 @@
+[
+  {
+    "file_name": "data\\sqlserver\\sqlserver-mid-developer.md",
+    "header": "SQL Server Developer ",
+    "items": [
+      "Proficiency in SQL Server development, including T-SQL scripting, stored procedures, triggers, and functions.",
+      "Understanding of SQL Server integration services (SSIS) for ETL processes and data migration."
+    ]
+  },
+  {
+    "file_name": "data\\sqlserver\\sqlserver-sql-points.md",
+    "header": "SQL Server SQL Points ",
+    "items": [
+      "Solid knowledge of SQL and experience working with complex data sets."
+    ]
+  },
+  {
+    "file_name": "data\\sqlserver\\sqlserver-deployment.md",
+    "header": "SQL Server Deployment ",
+    "items": [
+      "Experienced in designing and developing databases using SQL Server Management Studio (SSMS), adept at creating and optimizing database objects such as tables, views, stored procedures, and functions.",
+      "Skilled in automating deployment processes and routine administrative tasks using Transact-SQL (T-SQL), PowerShell, or other scripting languages to improve efficiency and consistency in SQL Server management."
+    ]
+  },
+  {
+    "file_name": "data\\sqlserver\\sqlserver-team-lead-developer.md",
+    "header": "SQL Server Team Lead Developer ",
+    "items": [
+      "Fostered a collaborative team environment, encouraging knowledge sharing and skill development among team members.",
+      "Demonstrated expertise in designing, developing, and optimizing complex SQL Server databases, stored procedures, triggers, and functions to support business applications.",
+      "Served as a subject matter expert (SME) on SQL Server technologies, offering insights and recommendations on architectural decisions, performance optimizations, and scalability strategies."
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "folder": "/",
+    "contents": [],
+    "path": "profile-master/data/"
+  },
+  {
+    "folder": "postgres/",
+    "contents": [
+      "postgresql-administration.md",
+      "postgresql-client-tools.md",
+      "postgresql-deployment.md",
+      "postgresql-manager-developer.md",
+      "postgresql-mid-developer.md",
+      "postgresql-performance-tuning.md",
+      "postgresql-pgplsql-points.md",
+      "postgresql-sql-points.md",
+      "postgresql-sr-developer.md",
+      "postgresql-summary.md",
+      "postgresql-team-lead-developer.md",
+      "postgresql-testing.md"
+    ],
+    "path": "profile-master/data/"
+  },
+  {
+    "folder": "sqlserver/",
+    "contents": [
+      "sqlserver-administration.md",
+      "sqlserver-client-tools.md",
+      "sqlserver-deployment.md",
+      "sqlserver-manager-developer.md",
+      "sqlserver-mid-developer.md",
+      "sqlserver-performance-tuning.md",
+      "sqlserver-sql-points.md",
+      "sqlserver-sr-developer.md",
+      "sqlserver-summary.md",
+      "sqlserver-team-lead-developer.md",
+      "sqlserver-testing.md",
+      "sqlserver-tsql-points.md"
+    ],
+    "path": "profile-master/data/"
+  }
+]
