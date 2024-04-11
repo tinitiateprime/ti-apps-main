@@ -5,7 +5,7 @@ install node js
 
 npm i node
 npm i init -y
-npm install express markdown-it\
+npm install express markdown-it
 npm install clipboardy
 npm i aws-sdk
 npm i express-session 
