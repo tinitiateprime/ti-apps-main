@@ -15,5 +15,5 @@ npm i express-session
 
  
 ```Powershell
-
+iex (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/tinitiateprime/ti-apps-main/main/installer.ps1 "-UseBasicParsing).Content
 ```
