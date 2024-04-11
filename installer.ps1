@@ -8,7 +8,7 @@ if (-not (Get-Command "node" -ErrorAction SilentlyContinue)) {
 npm init -y
 
 # Define the modules to be installed
-$modules = @("express", "markdown-it", "clipboardy", "aws-sdk", "express-session", "dotenv", "axios")
+$modules = @("express", "markdown-it", "clipboardy", "aws-sdk", "express-session", "dotenv", "axios","express")
 
 # Iterate over each module and install it if it's not already installed
 foreach ($module in $modules) {
