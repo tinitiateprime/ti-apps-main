@@ -45,20 +45,20 @@ app.get('/', (req, res) => {
   });
 
  
-app.get('/ti-apps-profile-manager1/index.html', (req, res) => {
-    res.sendFile(path.join(__dirname,'ti-apps-profile-manager1', 'index.html'));
+app.get('/ti-apps-profile-manager-main/index.html', (req, res) => {
+    res.sendFile(path.join(__dirname,'ti-apps-profile-manager-main', 'index.html'));
     
 });
 
-app.get('/ti-apps-profile-manager1/style.css', (req, res) => {
-    res.sendFile(path.join(__dirname,'ti-apps-profile-manager1', 'style.css'));
+app.get('/ti-apps-profile-manager-main/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname,'ti-apps-profile-manager-main', 'style.css'));
 });
 
-app.get('/ti-apps-profile-manager1/scripts/index.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager1','scripts', 'index.js'));    
+app.get('/ti-apps-profile-manager-main/scripts/index.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager-main','scripts', 'index.js'));    
 });
-app.get('/ti-apps-profile-manager1/home.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager1','views', 'home.html'));    
+app.get('/ti-apps-profile-manager-main/home.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ti-apps-profile-manager-main','views', 'home.html'));    
 });
 
 const bucketName = 'ti-apps-data';
@@ -102,7 +102,7 @@ const bucketName = 'ti-apps-data';
 
     
     // Save the output to a JSON file
-    fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','markdown-driver.json'), JSON.stringify(structure, null, 2), (writeErr) => {
+    fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager-main','markdown-driver.json'), JSON.stringify(structure, null, 2), (writeErr) => {
       if (writeErr) {
         console.log('Error writing to file:', writeErr);
       } else {
@@ -116,11 +116,11 @@ const bucketName = 'ti-apps-data';
 
 const directoryPath = 'profile-master/data/';
 const filePath = []
-app.get('/ti-apps-profile-manager1/jsondata', (req, res) => {
+app.get('/ti-apps-profile-manager-main/jsondata', (req, res) => {
    readDirectory(directoryPath);
 
   //const mdFiles = fileList.filter(file => path.extname(file) === '.md');
-  fs.readFile(path.join(__dirname,'ti-apps-profile-manager1','markdown-driver.json'), 'utf8', (err, content) => {
+  fs.readFile(path.join(__dirname,'ti-apps-profile-manager-main','markdown-driver.json'), 'utf8', (err, content) => {
     if (err) {
         console.error('Error reading file:', err);
         res.status(500).send('Error reading file');
@@ -133,7 +133,7 @@ app.get('/ti-apps-profile-manager1/jsondata', (req, res) => {
 
 
 
-app.get('/ti-apps-profile-manager1/mdcontent', (req, res) => {
+app.get('/ti-apps-profile-manager-main/mdcontent', (req, res) => {
  console.log(req.query.file)
   //const directoryPath = path.join(__dirname, req.query.file);
   const filePath = path.join(__dirname, req.query.file);
@@ -156,7 +156,7 @@ s3.getObject({ Bucket: bucketName, Key: fileKey }, (err, data) => {
 });});
 
 
-app.post('/ti-apps-profile-manager1/save', (req, res) => {
+app.post('/ti-apps-profile-manager-main/save', (req, res) => {
   
   const jsonData = req.body;
   //console.log(jsonData)
@@ -169,24 +169,24 @@ app.post('/ti-apps-profile-manager1/save', (req, res) => {
       });
   });
 
-  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','Output', 'output.md'), markdownContent);
+  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager-main','Output', 'output.md'), markdownContent);
 
   res.send('Data saved successfully');
 });
 
-app.post('/ti-apps-profile-manager1/draft', (req, res) => {
+app.post('/ti-apps-profile-manager-main/draft', (req, res) => {
   
   const jsonData = req.body;
   //console.log(jsonData)
   
-  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'), JSON.stringify(jsonData, null, 2));
+  fs.writeFileSync(path.join(__dirname,'ti-apps-profile-manager-main','Drafts', 'draft.json'), JSON.stringify(jsonData, null, 2));
 
   res.send('Data saved in draft');
 });
 
-app.get('/ti-apps-profile-manager1/load-draft', (req, res) => {
-  if (fs.existsSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'))) {
-      const jsonData = fs.readFileSync(path.join(__dirname,'ti-apps-profile-manager1','Drafts', 'draft.json'), 'utf8');
+app.get('/ti-apps-profile-manager-main/load-draft', (req, res) => {
+  if (fs.existsSync(path.join(__dirname,'ti-apps-profile-manager-main','Drafts', 'draft.json'))) {
+      const jsonData = fs.readFileSync(path.join(__dirname,'ti-apps-profile-manager-main','Drafts', 'draft.json'), 'utf8');
       res.json(JSON.parse(jsonData));
   } else {
       res.json([]);

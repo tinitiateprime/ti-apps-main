@@ -6,7 +6,7 @@ jsonData = []
 function getcontent(page,role){
 debugger
 if(page=='profile_manager'){
-window.location.href = './ti-apps-profile-manager1/index.html';
+window.location.href = './ti-apps-profile-manager-main/index.html';
 }
 else if (page=='mcq_quiz'){
     window.location.href = './ti-apps-mcq-quiz1/index.html';
