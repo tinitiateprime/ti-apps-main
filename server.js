@@ -306,17 +306,26 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
 });
 
 // interview qna code
-app.get('/ti-app-interview-qna/data', (req, res) => {
+
+  app.get('/ti-app-interview-qna/data', async (req, res) => {
+  //console.log(req.query)
   const page = parseInt(req.query.page) || 1;
   const minSectionsPerPage = parseInt(req.query.minSectionsPerPage) || 3;
+  const filename = req.query.file
   //console.log('inside qna fecth')
-  //listMarkdownFiles('your-bucket-name', 'your-folder-name/');
-  const mdPath = (path.join(__dirname,'ti-app-interview-qna','java','data1.md'));   
-  fs.readFile(mdPath, 'utf-8',(err, data) => {
+  const folderName = 'interview-qna/data/'
+  const params = {
+    Bucket: bucketName,
+    Prefix: folderName
+};
+
+ await s3.getObject({ Bucket: bucketName, Key: folderName+filename },  (err, data) => {
       if (err) {
           return res.status(500).send('Error reading Markdown file');
       }
       //1console.log('inside qna read')
+      //console.log(data)
+       data = data.Body.toString('utf-8');
       const sections = data.split('#').map(section => md.render('#' + section.trim().replace(/^/, 'Q ').substring(1))).filter(section => section.trim() !== '');
       const totalPages = Math.ceil(sections.length / minSectionsPerPage);
       const pageSize = Math.ceil(sections.length / totalPages); // page ques adjust.....
@@ -328,13 +337,42 @@ app.get('/ti-app-interview-qna/data', (req, res) => {
           data: paginatedSections
       });
   });
+ 
 });
+
+app.get('/ti-app-interview/listobj',  (req,res)=>{
+  //console.log(req.query.page)
+  
+  const folderName = 'interview-qna/data/'
+  const params = {
+    Bucket: bucketName,
+    Prefix: folderName
+};
+
+    s3.listObjectsV2(params, (err, data) => {
+    if (err) {
+        console.error('Error listing objects:', err);
+        return;
+    }
+
+    const mdFiles = data.Contents.filter(item => item.Key.endsWith('.md')).map(item => item.Key);
+
+    // Return the file names in JSON format
+    //console.log(JSON.stringify(mdFiles, null, 2));
+    res.json({
+      listobj:JSON.stringify(mdFiles)
+    });
+    
+  })
+
+})
+ 
 
 app.get('/ti-app-interview-qna/content', (req, res) => {
   //console.log('inside the fetch of the contnts')
 
   const fileList = []
-  const fileKey = 'interview-qna/aws-test/config.md';
+  const fileKey = 'interview-qna/config.md';
   
   s3.getObject({ Bucket: bucketName, Key: fileKey }, (err, data) => {
     if (err) {
@@ -379,25 +417,7 @@ function parseMarkdownToJSON(markdown) {
 }
   });
 
-  function listMarkdownFiles(bucketName, folderName) {
-    const params = {
-        Bucket: bucketName,
-        Prefix: folderName
-    };
   
-    s3.listObjectsV2(params, (err, data) => {
-        if (err) {
-            console.error('Error listing objects:', err);
-            return;
-        }
-  
-        // Filter for .md files
-        const mdFiles = data.Contents.filter(item => item.Key.endsWith('.md')).map(item => item.Key);
-  
-        // Return the file names in JSON format
-        console.log(JSON.stringify(mdFiles, null, 2));
-    });
-  }
 
   
 app.get('/ti-app-interview-qna/index.js', (req, res) => {
