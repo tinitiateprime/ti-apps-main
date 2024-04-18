@@ -327,14 +327,20 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
       //console.log(data)
        data = data.Body.toString('utf-8');
       const sections = data.split('#').map(section => md.render('#' + section.trim().replace(/^/, 'Q ').substring(1))).filter(section => section.trim() !== '');
+      const totalSections = sections.length;
+      const totalHashes = data.split('#').length - 1; 
       const totalPages = Math.ceil(sections.length / minSectionsPerPage);
       const pageSize = Math.ceil(sections.length / totalPages); // page ques adjust.....
       const paginatedSections = sections.slice((page - 1) * pageSize, page * pageSize);
 
       res.json({
+        totalPages,
           totalPages: totalPages,
+          totalSections,
           currentPage: page,
-          data: paginatedSections
+          totalHashes,
+          data: paginatedSections,
+          filename
       });
   });
  
@@ -343,7 +349,7 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
 app.get('/ti-app-interview/listobj',  (req,res)=>{
   //console.log(req.query.page)
   
-  const folderName = 'interview-qna/data/'
+  const folderName = 'interview-qna/data/'+req.query.page
   const params = {
     Bucket: bucketName,
     Prefix: folderName
@@ -354,15 +360,15 @@ app.get('/ti-app-interview/listobj',  (req,res)=>{
         console.error('Error listing objects:', err);
         return;
     }
-
+   
     const mdFiles = data.Contents.filter(item => item.Key.endsWith('.md')).map(item => item.Key);
-
+   
     // Return the file names in JSON format
     //console.log(JSON.stringify(mdFiles, null, 2));
     res.json({
       listobj:JSON.stringify(mdFiles)
     });
-    
+ 
   })
 
 })
@@ -372,21 +378,30 @@ app.get('/ti-app-interview-qna/content', (req, res) => {
   //console.log('inside the fetch of the contnts')
 
   const fileList = []
-  const fileKey = 'interview-qna/config.md';
+  const fileKey = 'interview-qna/data/';
   
-  s3.getObject({ Bucket: bucketName, Key: fileKey }, (err, data) => {
+  s3.listObjectsV2({ Bucket: bucketName, Prefix: fileKey }, (err, data) => {
     if (err) {
       console.log('Error:', err);
     } else {
       //console.log(data.Body.toString('utf-8'))
-      const json = parseMarkdownToJSON(data.Body.toString('utf-8'));
 
-    // Convert the JSON object to a string
-    const jsonString = JSON.stringify(json, null, 2);
+      //console.log(data.Contents)
+    
+     const folders= data.Contents.map(item => {
+      const parts = item.Key.split('/');
+      if (parts.length >= 3) {
+          return parts[2];
+      }
+      return null;
+      });
+      const uniqueFolderNames = Array.from(new Set(folders.filter(name => name)));
 
-    // Write the JSON string to a new file
-    res.json(JSON.parse(jsonString))
-    //console.log(res)
+      //console.log(uniqueFolderNames)
+  
+
+    res.json(uniqueFolderNames);
+    
     }
   });
 

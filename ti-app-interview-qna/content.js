@@ -1,10 +1,12 @@
 fetch('/ti-app-interview-qna/content')
 .then(response => response.json())
         .then(data => {
-            createTable(data.contents)
+            createTable(data)
         });
     
 async function createTable(data) {
+    //debugger
+    if (typeof data != 'undefined'){
     const container = document.getElementById('card-container');
 
 for (let i = 0; i < data.length; i += 3) {
@@ -46,7 +48,7 @@ for (let i = 0; i < data.length; i += 3) {
     // Append the card group to the container
     container.appendChild(cardGroup);
 }
-
+    }
 }
 
 

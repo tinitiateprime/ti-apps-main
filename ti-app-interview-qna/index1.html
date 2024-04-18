@@ -62,8 +62,8 @@ hr.solid {
     Navbar -->
 
         <div class="p-5 text-center bg-body-tertiary" style="margin-top: 58px;">
-          <h4 class="mb-3">Ti-Apps</h4>
-          <h3 class="mb-3" id="topic_name"></h3>
+          <h3 class="mb-3">Ti-Apps</h3>
+          <h4 class="mb-3" id="topic_name"></h4>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/index.html">Ti-Apps Home</a></li>
@@ -87,28 +87,49 @@ hr.solid {
       </header>
          
       <div class="head row h-2 " style="display: flex;">
-        <button class=" col btn btn-dark"   id="prev">&lt;- Previous</button>
-        <div class="col"></div>
-        <button class=" col btn btn-dark" id="next">Next -&gt;</button>
+        <button class=" col btn btn-dark prev">&lt;- Previous</button>
+        <div class="col" style="display: flex; justify-content: space-between;"><button type="button" class="btn btn-dark">Questions<span id="ques_badge" class="badge"></span></button>
+          <button id="showSelected" class="btn btn-dark">Selected Questions<span id="sel_badge" class="badge">3</span></button>
+      </div>
+        <button class=" col btn btn-dark next">Next -&gt;</button>
     </div>
          <!-- Offcanvas Sidebar -->
 
     <!-- <div id="" style="border:1px solid black; height: 100vh; overflow: auto;"><div id="accordian"></div></div> -->
  
-<div class="row mt-2">
+<div class="row mt-2 p-3">
  
-    <div class="col w-100" id="content" style="height: 100%;"> <div class="d-flex justify-content-center"> <div class="spinner-border text-muted"></div></div></div>
+    <div class="col w-100" id="content" style="height: 100%;"> <div class="d-flex justify-content-center"> <div class="spinner-border text-muted"></div></div></div>    </div>
+
 
 
 <hr class="solid">
 <div id="pagination-bar"></div>
 
-<div class="head row h-2 " style="display: flex;">
-  <button class=" col btn btn-dark"   id="prev">&lt;- Previous</button>
-  <div class="col"></div>
-  <button class=" col btn btn-dark" id="next">Next -&gt;</button>
+<div class="row h-2 " style="display: flex;">
+  <button class=" col btn btn-dark prev">&lt;- Previous</button>
+  <div class="col">
+  </div>
+  <button class=" col btn btn-dark next">Next -&gt;</button>
 </div>
-
+<!-- Modal -->
+<div class="modal modal modal-lg  fade" id="selectedQuestionsModal" tabindex="-1" aria-labelledby="selectedQuestionsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="selectedQuestionsModalLabel">Selected Questions</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="selectedQuestionsBody">
+             
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-dark">Save to pdf</button>
+            <button class="btn btn-dark">Save to md</button>
+          </div>
+      </div>
+  </div>
+</div>
 <footer>
     <div class="mt-4 p-5 bg-dark text-white rounded">
         <div class="row">
@@ -127,7 +148,6 @@ hr.solid {
                 </ul>
             </div>
         </div>
-    </div>
     </div>
 </footer>
 </div>
