@@ -6,6 +6,55 @@ const path = require('path');
 const AWS = require('aws-sdk');
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt();
+const cheerio = require('cheerio');
+const PDFDocument = require('pdfkit');
+const TurndownService = require('turndown');
+const markdownpdf = require('markdown-pdf');
+
+const turndownService = new TurndownService({headingStyle: 'atx',
+codeBlockStyle: 'fenced',
+hr: '---',
+bulletListMarker: '*',
+emDelimiter: '*',
+strongDelimiter: '**',
+linkStyle: 'inlined',
+linkReferenceStyle: 'full'
+});
+
+// let text = `<table>
+// <thead>
+// <tr>
+// <th>Feature</th>
+// <th>AWS S3</th>
+// <th>AWS EBS</th>
+// </tr>
+// </thead>
+// <tbody>
+// <tr>
+// <td>Paradigm</td>
+// <td>Object Store</td>
+// <td>Filesystem</td>
+// </tr>
+// <tr>
+// <td>Performance</td>
+// <td>Fast</td>
+// <td>Superfast</td>
+// </tr>
+// <tr>
+// <td>Redundancy</td>
+// <td>Across data centers</td>
+// <td>Within a data center</td>
+// </tr>
+// <tr>
+// <td>Security</td>
+// <td>Using public or private key</td>
+// <td>Can be used only with EC2</td>
+// </tr>
+// </tbody>
+// </table>`
+// const markdown = turndownService.turndown(text);
+//         console.log(markdown);
+
 
 const credentials = new AWS.SharedIniFileCredentials({ profile: 'tiappsadmin' });
 AWS.config.credentials = credentials;
@@ -18,6 +67,7 @@ const s3 = new AWS.S3();
 
 const app = express();
 
+const doc = new PDFDocument();
 
 
 app.use(express.static('public'));
@@ -310,7 +360,7 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
   app.get('/ti-app-interview-qna/data', async (req, res) => {
   //console.log(req.query)
   const page = parseInt(req.query.page) || 1;
-  const minSectionsPerPage = parseInt(req.query.minSectionsPerPage) || 3;
+  const minSectionsPerPage = parseInt(req.query.minSectionsPerPage) || 5;
   const filename = req.query.file
   //console.log('inside qna fecth')
   const folderName = 'interview-qna/data/'
@@ -326,12 +376,19 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
       //1console.log('inside qna read')
       //console.log(data)
        data = data.Body.toString('utf-8');
+       let seg =''
       const sections = data.split('#').map(section => md.render('#' + section.trim().replace(/^/, 'Q ').substring(1))).filter(section => section.trim() !== '');
       const totalSections = sections.length;
-      const totalHashes = data.split('#').length - 1; 
+      const totalHashes = data.split('#').length-1; 
       const totalPages = Math.ceil(sections.length / minSectionsPerPage);
       const pageSize = Math.ceil(sections.length / totalPages); // page ques adjust.....
-      const paginatedSections = sections.slice((page - 1) * pageSize, page * pageSize);
+      const paginatedSections = sections.slice((page - 1)*pageSize , page * pageSize);
+      paginatedSections.forEach((segment,index)=>{
+        //console.log(segment)
+        seg+=`<div id="Content_${index}"><input type="checkbox" onchange="attachCheckboxes(this)"/>${segment}</div>`
+       })
+//      console.log(seg)
+
 
       res.json({
         totalPages,
@@ -339,7 +396,7 @@ app.post('/ti-apps-mcq-quiz1/submit', (req, res) => {
           totalSections,
           currentPage: page,
           totalHashes,
-          data: paginatedSections,
+          data: seg,
           filename
       });
   });
@@ -360,7 +417,7 @@ app.get('/ti-app-interview/listobj',  (req,res)=>{
         console.error('Error listing objects:', err);
         return;
     }
-   
+   //console.log('line 373')
     const mdFiles = data.Contents.filter(item => item.Key.endsWith('.md')).map(item => item.Key);
    
     // Return the file names in JSON format
@@ -386,7 +443,7 @@ app.get('/ti-app-interview-qna/content', (req, res) => {
     } else {
       //console.log(data.Body.toString('utf-8'))
 
-      //console.log(data.Contents)
+      console.log('line 399')
     
      const folders= data.Contents.map(item => {
       const parts = item.Key.split('/');
@@ -405,6 +462,7 @@ app.get('/ti-app-interview-qna/content', (req, res) => {
     }
   });
 
+  
 
 /**
  * Parses the Markdown content into a JSON object.
@@ -433,6 +491,43 @@ function parseMarkdownToJSON(markdown) {
   });
 
   
+
+// Route to generate and download PDF
+app.post('/ti-app-interview-qna/generate-pdf', async (req,res)=>{
+  //console.log(req.query)
+    const text = req.body;
+    //console.log(text[0].items)
+    let pdfcontent = ''
+    try{
+        const markdown = turndownService.turndown(text[0].items);
+        //console.log(markdown);
+      const pdfFilePath = 'output.pdf'
+        markdownpdf().from.string(markdown).to(pdfFilePath, () => {
+          console.log(`PDF generated: ${pdfFilePath}`);
+          //callback(null, outputFilePath);
+      });
+    
+      // fs.readFile(pdfFilePath, (err, data) => {
+      //   if (err) {
+      //       console.error('Error reading PDF file:', err);
+      //       res.writeHead(500, { 'Content-Type': 'text/plain' });
+      //       res.end('Internal Server Error');
+      //       return;
+      //   }
+        
+      //   res.setHeader('Content-disposition', 'attachment; filename=' + pdfFilePath);
+      //   res.setHeader('Content-Type', 'application/pdf');
+      //   res.end(data);
+    // });
+
+    fs.writeFileSync(path.join(__dirname,'output.md'), markdown);
+  
+   // res.send('Data saved successfully');
+    }
+    catch (ex){
+      console.log(ex)
+    }
+});
 
   
 app.get('/ti-app-interview-qna/index.js', (req, res) => {

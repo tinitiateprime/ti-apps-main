@@ -17,7 +17,12 @@ display: flex;
 hr.solid {
   border-top: 3px solid #bbb;
 }
-
+button{
+ box-shadow: 5px 5px 2px lightgray;
+}
+li{
+  font-size: 19px;
+}
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,46 +30,12 @@ hr.solid {
 </head>
 <body>
   <!-- Navbar -->
-
-
     <div  class="container">
-      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
-          <button
-            data-mdb-collapse-init
-            class="navbar-toggler"
-            type="button"
-            data-mdb-target="#navbarExample01"
-            aria-controls="navbarExample01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarExample01">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item active">
-                <a class="nav-link" aria-current="page" href="/menu.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    Navbar -->
-
-        <div class="p-5 text-center bg-body-tertiary" style="margin-top: 58px;">
+     <div class="p-5 bg-body-tertiary" style="margin-top: 12px; box-shadow: 7px 10px 4px #888883;">
+        <img src="/website/images/node_icon.png" alt="" style="width:4rem; height:4rem;">
           <h3 class="mb-3">Ti-Apps</h3>
           <h4 class="mb-3" id="topic_name"></h4>
-          <nav aria-label="breadcrumb">
+          <nav aria-label="breadcrumb" style="box-shadow: 5px 5px 2px lightgray;">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/index.html">Ti-Apps Home</a></li>
               <li class="breadcrumb-item"><a href="/ti-app-interview-qna/index.html">Home</a></li>
@@ -86,9 +57,9 @@ hr.solid {
         <!-- Jumbotron -->
       </header>
          
-      <div class="head row h-2 " style="display: flex;">
+      <div class="head row h-2 mt-3" style="display: flex;">
         <button class=" col btn btn-dark prev">&lt;- Previous</button>
-        <div class="col" style="display: flex; justify-content: space-between;"><button type="button" class="btn btn-dark">Questions<span id="ques_badge" class="badge"></span></button>
+        <div class="col" style="display: flex; justify-content: space-between;align-items:center;"><div style="box-shadow: 10px 10px 5px; padding: 10px;">Questions<span id="ques_badge" class="badge" style="box-shadow: 10px 10px 5px; background-color: black; margin-left:6px;"></span></div>
           <button id="showSelected" class="btn btn-dark">Selected Questions<span id="sel_badge" class="badge">3</span></button>
       </div>
         <button class=" col btn btn-dark next">Next -&gt;</button>
@@ -104,12 +75,11 @@ hr.solid {
 
 
 <hr class="solid">
-<div id="pagination-bar"></div>
 
 <div class="row h-2 " style="display: flex;">
   <button class=" col btn btn-dark prev">&lt;- Previous</button>
-  <div class="col">
-  </div>
+  <div class="col"><div id="pagination-bar" style="box-shadow: 5px 5px 2px lightgray;"></div></div>
+
   <button class=" col btn btn-dark next">Next -&gt;</button>
 </div>
 <!-- Modal -->
@@ -124,7 +94,7 @@ hr.solid {
              
           </div>
           <div class="modal-footer">
-            <button class="btn btn-dark">Save to pdf</button>
+            <button class="btn btn-dark" onclick="savepdf()">Save to pdf</button>
             <button class="btn btn-dark">Save to md</button>
           </div>
       </div>

@@ -17,6 +17,7 @@ function listobj(cellValue){
                 });
                 $('#list_topics').append(html)
                 fetchData(currentPage,window["cellValue"]+'/'+window["list1"])
+               
             });
     
         }
@@ -29,7 +30,7 @@ function fetchData(page,filename) {
         $('#content').append('<div class="d-flex justify-content-center"> <div class="spinner-border text-muted"></div></div>')
     return new Promise((resolve, reject) => {
 
-    fetch(`/ti-app-interview-qna/data?page=${page}&minSectionsPerPage=3&file=${filename}`)
+    fetch(`/ti-app-interview-qna/data?page=${page}&minSectionsPerPage=5&file=${filename}`)
         .then(response => response.json())
         .then(data => {
             //debugger
@@ -38,7 +39,8 @@ function fetchData(page,filename) {
             window["currenttopic"]=data.filename
             $('#ques_badge').html(data.totalHashes);
             $('#topic_name').html(data.filename.split('/')[0]+'-'+data.filename.split('/')[1].split('.')[0])
-            document.getElementById('content').innerHTML = data.data.join('');
+            $('#topic_name2').html(data.filename.split('/')[0]+'- Topics')
+            document.getElementById('content').innerHTML = data.data;
             currentPage = data.currentPage;
             numberofmd= data.noofmd
 
@@ -69,7 +71,8 @@ function fetchData(page,filename) {
             document.getElementById('pagination-bar').innerHTML = paginationBar;
 
             document.getElementById('btn'+page).classList.add('btn-primary');
-            attachCheckboxes();
+            $('#Content_0').remove()
+            $('h1').css('display','inline','margin-right','2%')
 
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -92,27 +95,86 @@ $('.next').click(()=> {
 listobj(localStorage.getqna)
 
 
-function attachCheckboxes() {
+function attachCheckboxes(checkbox) {
     //debugger
-    document.querySelectorAll('#content h1').forEach((question, index) => {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `question-${index}`;
-        checkbox.className = 'question-checkbox';
-        checkbox.style = 'margin-right:7px';
-        checkbox.addEventListener('change', () => {
+            var iid = checkbox.parentElement.id
+            var hhtml = $('#'+iid).html().substr(57);
             if (checkbox.checked) {
-                selectedQuestions.push(question.innerText);                
+                //debugger
+               
+                selectedQuestions.push(hhtml);                
             } else {
-                selectedQuestions = selectedQuestions.filter(q => q !== question.innerText);
+                selectedQuestions = selectedQuestions.filter(q => q !== hhtml);
             }
-        });
-        question.insertBefore(checkbox, question.firstChild);
-    });
+            
 }
 
 $('#showSelected').click(()=>{
-    $('#selectedQuestionsBody').append(selectedQuestions+'<br>')
+    let html = ''
+    html+=`<ul class="list-group selques">`
+    selectedQuestions.forEach((ele,index)=>{
+        html+=`<li class="list-group-item gem">${ele}</li>`
+    })
+    html+=`</ul>`
+    $('#selectedQuestionsBody').append(html)
                 
     $('#selectedQuestionsModal').modal('show')
 })
+
+
+
+function savepdf(){
+    debugger
+    var ele = []
+    let data = ''
+    $('.gem').each(function() {
+        debugger
+               
+        data += $(this).html()
+
+        
+
+    });
+    ele.push({
+        items:data
+        })
+        
+
+    $.ajax({
+        url: '/ti-app-interview-qna/generate-pdf',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(ele),
+        success: function(response) {
+            console.log('Data saved:', response);
+            downloadFile(response)
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
+   
+
+}
+
+function downloadFile() {
+    debugger
+        const fileName = 'example.txt';
+        const fileContent = 'Hello, world!';
+    // Create a Blob with the file content
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    
+    // Create a URL representing the Blob object
+    const url = URL.createObjectURL(blob);
+    
+    // Create a temporary anchor element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    
+    // Trigger a click event on the anchor element to initiate download
+    a.click();
+    
+    // Clean up by revoking the URL object
+    URL.revokeObjectURL(url);
+}
