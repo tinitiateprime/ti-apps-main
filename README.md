@@ -10,7 +10,12 @@ npm install clipboardy
 npm i aws-sdk
 npm i express-session 
  npm i dotenv
- npm i axios 
+ npm i axios
+npm install -g @ionic/cli
+npm install cheerio
+npm install turndown
+npm install markdown-pdf
+
 ```
 
  
