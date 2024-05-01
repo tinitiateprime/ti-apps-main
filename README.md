@@ -14,7 +14,7 @@ npm i express-session
 npm install -g @ionic/cli
 npm install cheerio
 npm install turndown
-
+npm install markdown-pdf
 
 ```
 
